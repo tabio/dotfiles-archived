@@ -18,6 +18,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " 読み込むプラグインを記載
 NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/neocomplete.vim'
+"NeoBundle 'violetyk/neocomplete-php.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'Shougo/neosnippet.vim'
@@ -29,8 +31,6 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'scrooloose/nerdtree'
-
-" C-pでファイルを瞬時に開く
 NeoBundle 'kien/ctrlp.vim'
 
 " colorschema
@@ -40,62 +40,51 @@ NeoBundle 'mrkn/mrkn256.vim'
 NeoBundle 'therubymug/vim-pyte'
 NeoBundle 'vim-scripts/Zenburn'
 
+" ruby補完
+NeoBundle 'vim-scripts/ruby-matchit', { "autoload" : {  "filetypes" : [ "ruby", "eruby" ] } }
+NeoBundleLazy 'marcus/rsense', { 'autoload': { 'filetypes': 'ruby', } , }
+NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : { 'insert' : 1, 'filetypes': 'ruby', } }
+
 call neobundle#end()
 
 "====================================================================
 
 
 ""=============================== 補完機能 ===========================
-"
-"" 補完候補が一つしかなくてもポップアップメニューを表示
-"" previewは重いので設定しないこと
-"set completeopt=menuone
-"
-"function! s:meet_neocomplete_requirements()
-"  return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
-"endfunction
-"
-"if s:meet_neocomplete_requirements()
-"  NeoBundle      'Shougo/neocomplete.vim'
-"  NeoBundleFetch 'Shougo/neocomplcache.vim'
-"else
-"  NeoBundleFetch 'Shougo/neocomplete.vim'
-"  NeoBundle      'Shougo/neocomplcache.vim'
-"endif
-"
-"
-"if s:meet_neocomplete_requirements()
-"  "====> neocompleteの設定
-"  " 起動時に有効化
-"  let g:neocomplete#enable_at_startup = 1
-"
-"  " tabで補完候補の選択を行う
-"  "inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>" 
-"  inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>" 
-"
-"  " ポップアップメニューで表示される候補の数
-"  let g:neocomplete#max_list = 20
-"
-"  " 大文字が入力されるまで大文字小文字の区別を無視する
-"  let g:neocomplete#enable_smart_case = 1
-"
-"else
-"  "====> neocomplcacheの設定
-"
-"  " 起動時に有効化
-"  let g:neocomplcache_enable_at_startup = 1
-"  
-"  "tabで補完候補の選択を行う
-"  "inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>" 
-"  inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>" 
-"  
-"  " ポップアップメニューで表示される候補の数
-"  let g:neocomplcache_max_list = 20
-"  
-"  " 大文字が入力されるまで大文字小文字の区別を無視する
-"  let g:neocomplcache_enable_smart_case = 1
-"endif
-"
+" neocomplete
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_ignore_case = 1
+let g:neocomplete#enable_smart_case = 1
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns._ = '\h\w*'
+" tabで補完候補の選択を行う
+"inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>" 
+"noremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>" 
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+" ポップアップメニューで表示される候補の数
+let g:neocomplete#max_list = 20
+
+" 大文字が入力されるまで大文字小文字の区別を無視する
+let g:neocomplete#enable_smart_case = 1
+
+highlight Pmenu ctermbg=248 guibg=#606060
+highlight PmenuSel ctermbg=159 guifg=#dddd00 guibg=#1f82cd
+highlight PmenuSbar ctermbg=0 guibg=#d6d6d6
+
+" neocomplete for php dictionary
+let g:neocomplete_php_locale = 'ja'
+
+" 補完機能 : ruby 
+let g:rsenseUseOmniFunc = 1
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+
 ""====================================================================
 
 
@@ -327,7 +316,6 @@ let g:clever_f_chars_match_any_signs = ';'
 
 
 "================== 階層色付け(vim-indent-guides) ====================
-
 let g:indent_guides_enable_on_vim_startup = 1
 
 " 自動カラー無効
@@ -353,9 +341,6 @@ nnoremap subp y:OverCommandLine<CR>%s!<C-r>=substitute(@0, '!', '\\!', 'g')<CR>!
 
 
 "=============== NERDTree.vim  =======================================
-" NERDTreeの起動
-"let NERDTree = 1
-
 " 起動用キーバインド
 nmap <silent> <C-e>      :NERDTreeToggle<CR>
 vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
