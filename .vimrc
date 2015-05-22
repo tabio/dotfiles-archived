@@ -40,10 +40,25 @@ NeoBundle 'mrkn/mrkn256.vim'
 NeoBundle 'therubymug/vim-pyte'
 NeoBundle 'vim-scripts/Zenburn'
 
+" コメントON/OFFを手軽に実行
+NeoBundle 'tomtom/tcomment_vim'
+
+" シングルクオートとダブルクオートの入れ替え等
+NeoBundle 'tpope/vim-surround'
+
+" ログファイルを色づけしてくれる
+NeoBundle 'vim-scripts/AnsiEsc.vim'
+
 " ruby補完
 NeoBundle 'vim-scripts/ruby-matchit', { "autoload" : {  "filetypes" : [ "ruby", "eruby" ] } }
 NeoBundleLazy 'marcus/rsense', { 'autoload': { 'filetypes': 'ruby', } , }
 NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : { 'insert' : 1, 'filetypes': 'ruby', } }
+
+" Ruby向けにendを自動挿入してくれる
+NeoBundle 'tpope/vim-endwise'
+
+" Rails向けのコマンドを提供する
+NeoBundle 'tpope/vim-rails'
 
 call neobundle#end()
 
@@ -222,11 +237,42 @@ let g:syntastic_warning_symbol='?'
 set laststatus=2
 set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=<%l行/%L行(%p%%),%v列>
 highlight StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=white
+
+
+" 挿入モード時、ステータスラインの色を変更
+" https://sites.google.com/site/fudist/Home/vim-nihongo-ban/-vimrc-sample
+let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
+
+if has('syntax')
+  augroup InsertHook
+    autocmd!
+    autocmd InsertEnter * call s:StatusLine('Enter')
+    autocmd InsertLeave * call s:StatusLine('Leave')
+  augroup END
+endif
+
+let s:slhlcmd = ''
+function! s:StatusLine(mode)
+  if a:mode == 'Enter'
+    silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
+    silent exec g:hi_insert
+  else
+    highlight clear StatusLine
+    silent exec s:slhlcmd
+  endif
+endfunction
+
+function! s:GetHighlight(hi)
+  redir => hl
+  exec 'highlight '.a:hi
+  redir END
+  let hl = substitute(hl, '[\r\n]', '', 'g')
+  let hl = substitute(hl, 'xxx', '', '')
+  return hl
+endfunction
 "====================================================================
 
 
-
- 
 
 "========================== キー割り当て ============================
 " キー割り当て: ESCをCtrl+j
