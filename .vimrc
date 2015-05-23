@@ -43,11 +43,17 @@ NeoBundle 'vim-scripts/Zenburn'
 " コメントON/OFFを手軽に実行
 NeoBundle 'tomtom/tcomment_vim'
 
-" シングルクオートとダブルクオートの入れ替え等
+" 選択部分の整形
+NeoBundle 'vim-easy-align'
+
+" 選択文字の両端に文字追加
 NeoBundle 'tpope/vim-surround'
 
 " ログファイルを色づけしてくれる
 NeoBundle 'vim-scripts/AnsiEsc.vim'
+
+" true / falseの変更
+NeoBundle 'AndrewRadev/switch.vim'
 
 " ruby補完
 NeoBundle 'vim-scripts/ruby-matchit', { "autoload" : {  "filetypes" : [ "ruby", "eruby" ] } }
@@ -405,6 +411,20 @@ let NERDTreeHighlightCursorline = 0
 
 " 隠しファイルを表示
 let NERDTreeShowHidden = 1
+"=====================================================================
+
+
+"====================== 選択部分の整形 ============================
+" vip -> Enter -> 対象文字
+vmap <Enter> <Plug>(EasyAlign)
+" gaip -> 対象文字
+nmap ga <Plug>(EasyAlign)
+"=====================================================================
+
+
+"====================== true / false 変更 ============================
+nmap + :Switch<CR>
+nmap - :Switch<CR>
 "=====================================================================
 
 
