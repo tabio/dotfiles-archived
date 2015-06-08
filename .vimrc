@@ -19,6 +19,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " 読み込むプラグインを記載
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
 "NeoBundle 'violetyk/neocomplete-php.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
