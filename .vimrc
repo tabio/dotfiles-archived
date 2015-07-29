@@ -19,8 +19,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " 読み込むプラグインを記載
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
 "NeoBundle 'violetyk/neocomplete-php.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'Shougo/neosnippet.vim'
@@ -35,11 +35,11 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'kien/ctrlp.vim'
 
 " colorschema
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'jeffreyiacono/vim-colors-wombat'
-NeoBundle 'mrkn/mrkn256.vim'
-NeoBundle 'therubymug/vim-pyte'
-NeoBundle 'vim-scripts/Zenburn'
+" NeoBundle 'altercation/vim-colors-solarized'
+" NeoBundle 'jeffreyiacono/vim-colors-wombat'
+" NeoBundle 'mrkn/mrkn256.vim'
+" NeoBundle 'therubymug/vim-pyte'
+" NeoBundle 'vim-scripts/Zenburn'
 
 " コメントON/OFFを手軽に実行
 NeoBundle 'tomtom/tcomment_vim'
@@ -56,16 +56,20 @@ NeoBundle 'vim-scripts/AnsiEsc.vim'
 " true / falseの変更
 NeoBundle 'AndrewRadev/switch.vim'
 
+" == for ruby
 " ruby補完
-NeoBundle 'vim-scripts/ruby-matchit', { "autoload" : {  "filetypes" : [ "ruby", "eruby" ] } }
-NeoBundleLazy 'marcus/rsense', { 'autoload': { 'filetypes': 'ruby', } , }
-NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : { 'insert' : 1, 'filetypes': 'ruby', } }
+" NeoBundle 'vim-scripts/ruby-matchit', { "autoload" : {  "filetypes" : [ "ruby", "eruby" ] } }
+" NeoBundleLazy 'marcus/rsense', { 'autoload': { 'filetypes': 'ruby', } , }
+" NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : { 'insert' : 1, 'filetypes': 'ruby', } }
 
 " Ruby向けにendを自動挿入してくれる
 NeoBundle 'tpope/vim-endwise'
 
 " Rails向けのコマンドを提供する
 NeoBundle 'tpope/vim-rails'
+
+" slim
+NeoBundle 'slim-template/vim-slim'
 
 call neobundle#end()
 
@@ -214,11 +218,15 @@ set history=100
 
 
 
-
-"========================== 簡易クリップボード ======================
-"vmap <Space>b      :w!~/.vim/bf<CR>
-"imap <Space>b <ESC>:read ~/.vim/bf<CR>i
-"nmap <Space>b      :read ~/.vim/bf<CR>
+"========================== unite.vim ======================
+let g:unite_enable_start_insert=1
+let g:unite_source_history_yank_enable =1
+let g:unite_source_file_mru_limit = 200
+nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 "====================================================================
 
 
