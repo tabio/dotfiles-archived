@@ -1,5 +1,3 @@
-" viとの互換モードのOFF
-set nocompatible
 
 " 一旦ファイルタイプ関連を無効化する
 filetype off
@@ -217,8 +215,14 @@ set history=100
 
 
 
+"========================== ctags ===================================
+nnoremap <C-@> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
+"nnoremap <C-@> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
+"====================================================================
 
-"========================== unite.vim ======================
+
+
+"========================== unite.vim ===============================
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable =1
 let g:unite_source_file_mru_limit = 200
