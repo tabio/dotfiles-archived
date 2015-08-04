@@ -160,10 +160,6 @@ set showmatch
 " 対応する括弧の表示時間を2にする
 set matchtime=2
 
-" 全角スペース表示
-highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
-match ZenkakuSpace /　/
-
 " 背景色が黒の時の端末共通の色設定
 highlight CursorLine ctermfg=none       ctermbg=darkgray cterm=none
 highlight MatchParen ctermfg=none       ctermbg=darkgray 
@@ -267,6 +263,13 @@ if has('syntax')
     autocmd!
     autocmd InsertEnter * call s:StatusLine('Enter')
     autocmd InsertLeave * call s:StatusLine('Leave')
+  augroup END
+
+  " 行末のスペース表示
+  augroup HighlightTrailingSpaces
+    autocmd!
+    autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+    autocmd VimEnter,WinEnter * match TrailingSpaces /\(\s\|　\)\+$/
   augroup END
 endif
 
