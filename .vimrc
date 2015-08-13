@@ -250,7 +250,7 @@ let g:syntastic_warning_symbol='?'
 "============================ ステータスライン ======================
 " ステータスラインを表示
 set laststatus=2
-set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=<%l行/%L行(%p%%),%v列>
+set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=<%l行/%L行(%p%%),%v列>%{fugitive#statusline()}
 highlight StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=white
 
 
