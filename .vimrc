@@ -31,6 +31,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'kchmck/vim-coffee-script'
 
 " colorschema
 " NeoBundle 'altercation/vim-colors-solarized'
@@ -441,6 +442,14 @@ nmap ga <Plug>(EasyAlign)
 "====================== true / false 変更 ============================
 nmap + :Switch<CR>
 nmap - :Switch<CR>
+"=====================================================================
+
+
+"====================== CoffeeScript =================================
+au BufRead,BufNewFile,BufReadPre *.coffee    set filetype=coffee
+autocmd FileType coffee    setlocal sw=2 sts=2 ts=2 et
+au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
+nnoremap <silent> <C-C> :CoffeeCompile vert <CR><C-w>h
 "=====================================================================
 
 
