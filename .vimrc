@@ -213,8 +213,8 @@ set history=100
 
 
 "========================== ctags ===================================
-nnoremap <C-@> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
-"nnoremap <C-@> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
+nnoremap <F3> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR> 
+nnoremap <F4> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
 "====================================================================
 
 
