@@ -335,6 +335,12 @@ if has("autocmd")
       :!python %
     endif
   endfunction
+
+  " 最後のカーソル位置を復元する                                                                                                                                                             
+  autocmd BufReadPost *                                                                                                                                                                      
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |                                                                                                                                        
+  \   exe "normal! g'\"" |                                                                                                                                                                   
+  \ endif 
 endif
 "=====================================================================
 
