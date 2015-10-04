@@ -32,6 +32,8 @@ NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'rhysd/unite-codic.vim'
+NeoBundle 'koron/codic-vim'
 
 " colorschema
 " NeoBundle 'altercation/vim-colors-solarized'
