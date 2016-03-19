@@ -17,11 +17,11 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " 読み込むプラグインを記載
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neocomplete.vim'
-"NeoBundle 'violetyk/neocomplete-php.vim'
+" NeoBundle 'violetyk/neocomplete-php.vim'
+NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'rhysd/accelerated-jk'
 NeoBundle 'rhysd/clever-f.vim'
@@ -41,6 +41,7 @@ NeoBundle 'koron/codic-vim'
 " NeoBundle 'mrkn/mrkn256.vim'
 " NeoBundle 'therubymug/vim-pyte'
 " NeoBundle 'vim-scripts/Zenburn'
+" NeoBundle 'tomasr/molokai'
 
 " コメントON/OFFを手軽に実行
 NeoBundle 'tomtom/tcomment_vim'
@@ -57,12 +58,6 @@ NeoBundle 'vim-scripts/AnsiEsc.vim'
 " true / falseの変更
 NeoBundle 'AndrewRadev/switch.vim'
 
-" == for ruby
-" ruby補完
-" NeoBundle 'vim-scripts/ruby-matchit', { "autoload" : {  "filetypes" : [ "ruby", "eruby" ] } }
-" NeoBundleLazy 'marcus/rsense', { 'autoload': { 'filetypes': 'ruby', } , }
-" NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : { 'insert' : 1, 'filetypes': 'ruby', } }
-
 " Ruby向けにendを自動挿入してくれる
 NeoBundle 'tpope/vim-endwise'
 
@@ -72,8 +67,20 @@ NeoBundle 'tpope/vim-rails'
 " slim
 NeoBundle 'slim-template/vim-slim'
 
-call neobundle#end()
+" ステータスライン
+NeoBundle 'itchyny/lightline.vim'
 
+" 行末のスペース
+" NeoBundle 'vim-trailing-whitespace'
+
+" urlを開く
+NeoBundle 'tyru/open-browser.vim'
+
+" markdown
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+
+call neobundle#end()
 "====================================================================
 
 
@@ -104,17 +111,7 @@ highlight PmenuSbar ctermbg=0 guibg=#d6d6d6
 
 " neocomplete for php dictionary
 let g:neocomplete_php_locale = 'ja'
-
-" 補完機能 : ruby 
-let g:rsenseUseOmniFunc = 1
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-
-""====================================================================
-
-
+"====================================================================
 
 
 
@@ -162,6 +159,10 @@ set showmatch
 
 " 対応する括弧の表示時間を2にする
 set matchtime=2
+
+" 全角スペース表示
+highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+match ZenkakuSpace /　/
 
 " 背景色が黒の時の端末共通の色設定
 highlight CursorLine ctermfg=none       ctermbg=darkgray cterm=none
@@ -215,10 +216,9 @@ set history=100
 
 
 "========================== ctags ===================================
-nnoremap <F3> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR> 
-nnoremap <F4> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
+nnoremap <C-@> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
+"nnoremap <C-@> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
 "====================================================================
-
 
 
 "========================== unite.vim ===============================
@@ -251,50 +251,10 @@ let g:syntastic_warning_symbol='?'
 
 
 "============================ ステータスライン ======================
-" ステータスラインを表示
 set laststatus=2
-set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=<%l行/%L行(%p%%),%v列>%{fugitive#statusline()}
-highlight StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=white
-
-
-" 挿入モード時、ステータスラインの色を変更
-" https://sites.google.com/site/fudist/Home/vim-nihongo-ban/-vimrc-sample
-let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
-
-if has('syntax')
-  augroup InsertHook
-    autocmd!
-    autocmd InsertEnter * call s:StatusLine('Enter')
-    autocmd InsertLeave * call s:StatusLine('Leave')
-  augroup END
-
-  " 行末のスペース表示
-  augroup HighlightTrailingSpaces
-    autocmd!
-    autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
-    autocmd VimEnter,WinEnter * match TrailingSpaces /\(\s\|　\)\+$/
-  augroup END
-endif
-
-let s:slhlcmd = ''
-function! s:StatusLine(mode)
-  if a:mode == 'Enter'
-    silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
-    silent exec g:hi_insert
-  else
-    highlight clear StatusLine
-    silent exec s:slhlcmd
-  endif
-endfunction
-
-function! s:GetHighlight(hi)
-  redir => hl
-  exec 'highlight '.a:hi
-  redir END
-  let hl = substitute(hl, '[\r\n]', '', 'g')
-  let hl = substitute(hl, 'xxx', '', '')
-  return hl
-endfunction
+let g:lightline = {
+  \ 'colorscheme': 'wombat',
+  \ }
 "====================================================================
 
 
@@ -337,35 +297,25 @@ if has("autocmd")
       :!python %
     endif
   endfunction
-
-  " 最後のカーソル位置を復元する                                                                                                                                                             
-  autocmd BufReadPost *                                                                                                                                                                      
-  \ if line("'\"") > 0 && line ("'\"") <= line("$") |                                                                                                                                        
-  \   exe "normal! g'\"" |                                                                                                                                                                   
-  \ endif 
 endif
 "=====================================================================
 
 
-
-
 "==========================  スニペット =============================
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-" tabで候補を選択し、C-kで展開。タブで中の移動
-imap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
-let g:neosnippet#enable_snipmate_compatibility = 1
-" 辞書を指定
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" xmap <C-k>     <Plug>(neosnippet_expand_target)
+" " tabで候補を選択し、C-kで展開。タブで中の移動
+" imap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+" smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" if has('conceal')
+"   set conceallevel=2 concealcursor=i
+" endif
+"
+" let g:neosnippet#enable_snipmate_compatibility = 1
+" " 辞書を指定
+" let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 "====================================================================
-
-
 
 
 "========================  高速でjkを使う ===========================
@@ -373,9 +323,6 @@ let g:accelerated_jk_acceleration_table = [10,5,3]
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
 "====================================================================
-
-
-
 
 
 "================================ 賢いf ==============================
@@ -452,12 +399,23 @@ nmap + :Switch<CR>
 nmap - :Switch<CR>
 "=====================================================================
 
-
 "====================== CoffeeScript =================================
 au BufRead,BufNewFile,BufReadPre *.coffee    set filetype=coffee
 autocmd FileType coffee    setlocal sw=2 sts=2 ts=2 et
-au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
+"au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
 nnoremap <silent> <C-C> :CoffeeCompile vert <CR><C-w>h
+"=====================================================================
+
+
+"====================== Markdown形式のファイル =======================
+au BufRead,BufNewFile *.md set filetype=markdown
+"=====================================================================
+
+
+"====================== gxでURLをブラウザで開く ======================
+let g:netrw_nogx = 1
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
 "=====================================================================
 
 
