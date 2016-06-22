@@ -42,6 +42,7 @@ NeoBundle 'koron/codic-vim'
 " NeoBundle 'therubymug/vim-pyte'
 " NeoBundle 'vim-scripts/Zenburn'
 " NeoBundle 'tomasr/molokai'
+NeoBundle 'gorodinskiy/vim-coloresque.git'
 
 " コメントON/OFFを手軽に実行
 NeoBundle 'tomtom/tcomment_vim'
@@ -79,6 +80,11 @@ NeoBundle 'tyru/open-browser.vim'
 " markdown
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
+
+" tag
+NeoBundle 'vim-scripts/taglist.vim'
+" ファイルを閉じた都度ctag作成してくれる
+NeoBundle 'szw/vim-tags'
 
 call neobundle#end()
 "====================================================================
@@ -215,9 +221,16 @@ set history=100
 
 
 
-"========================== ctags ===================================
-nnoremap <C-@> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
+"========================== tags ===================================
+"nnoremap <C-@> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
 "nnoremap <C-@> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
+set tags = tags
+let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
+let Tlist_Show_One_File = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_Exit_OnlyWindow = 1
+let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
+let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
 "====================================================================
 
 
