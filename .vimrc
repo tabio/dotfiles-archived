@@ -42,6 +42,8 @@ NeoBundle 'koron/codic-vim'
 " NeoBundle 'therubymug/vim-pyte'
 " NeoBundle 'vim-scripts/Zenburn'
 " NeoBundle 'tomasr/molokai'
+
+" カラーコードを色付け
 NeoBundle 'gorodinskiy/vim-coloresque.git'
 
 " コメントON/OFFを手軽に実行
@@ -81,8 +83,9 @@ NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 
-" tag
+" tagをIDE風に使う
 NeoBundle 'vim-scripts/taglist.vim'
+
 " ファイルを閉じた都度ctag作成してくれる
 NeoBundle 'szw/vim-tags'
 
@@ -222,15 +225,17 @@ set history=100
 
 
 "========================== tags ===================================
-"nnoremap <C-@> :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
-"nnoremap <C-@> :split<CR> :exe("tjump ".expand('<cword>'))<CR>
-set tags = tags
 let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
 let Tlist_Show_One_File = 1
 let Tlist_Use_Right_Window = 1
 let Tlist_Exit_OnlyWindow = 1
-let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
-let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
+nmap <silent> <C-l> :TlistToggle<CR>
+
+" 最初はプロジェクトルートでTagsGenerate!
+let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -f .tags -R . 2>/dev/null"
+let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R -f .Gemfile.lock.tags `bundle show --paths` 2>/dev/null"
+set tags+=.tags
+set tags+=.Gemfile.lock.tags
 "====================================================================
 
 
