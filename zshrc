@@ -64,7 +64,10 @@ export EDITOR='vim'
 # aliasを上書きするファイル
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias gg='git grep -n'
+alias be="bundle exec"
+alias gg="git grep -n"
+alias ll="ls -lha"
+alias vi="vim"
 
 # 色を使用
 autoload -Uz colors
