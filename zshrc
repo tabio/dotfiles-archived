@@ -66,6 +66,7 @@ export EDITOR='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gg="git grep -n"
 alias ll="ls -lha"
+alias vi="vim"
 
 # 色を使用
 autoload -Uz colors
