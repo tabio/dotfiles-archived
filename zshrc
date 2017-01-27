@@ -136,3 +136,6 @@ function peco-select-history() {
 }
 zle -N peco-select-history
 bindkey '^r' peco-select-history
+
+# ctrl+j でノーマルモードに
+bindkey '^j' vi-cmd-mode
