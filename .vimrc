@@ -280,6 +280,8 @@ let g:lightline = {
 "========================== キー割り当て ============================
 " キー割り当て: ESCをCtrl+j
 imap <silent> <C-j> <ESC>
+" ハイライトのoff
+nnoremap <C-j> :noh<CR>
 
 " キー割り当て: ノーマル,ヴィジュアルモードのタブキー
 nmap <silent> <Tab> 15<Right>
