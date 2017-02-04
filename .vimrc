@@ -1,87 +1,24 @@
-
-" 一旦ファイルタイプ関連を無効化する
-filetype off
-
-"============================= neobundle  =========================
-" vim起動時のみruntimepathにneobundle.vimを追加
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-" neobundle.vimの初期化
-call neobundle#begin(expand('~/.vim/bundle/'))
+set runtimepath+=~/.vim/
+runtime! config/*.vim
 
 " neobundle自体をneobundleで管理しgit@github.com:を省略
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " 読み込むプラグインを記載
-NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplete.vim'
 " NeoBundle 'violetyk/neocomplete-php.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'rhysd/accelerated-jk'
-NeoBundle 'rhysd/clever-f.vim'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'osyo-manga/vim-over'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'rhysd/unite-codic.vim'
-NeoBundle 'koron/codic-vim'
 
-" colorschema
-" NeoBundle 'altercation/vim-colors-solarized'
-" NeoBundle 'jeffreyiacono/vim-colors-wombat'
-" NeoBundle 'mrkn/mrkn256.vim'
-" NeoBundle 'therubymug/vim-pyte'
-" NeoBundle 'vim-scripts/Zenburn'
-" NeoBundle 'tomasr/molokai'
 
-" カラーコードを色付け
-NeoBundle 'gorodinskiy/vim-coloresque.git'
 
-" コメントON/OFFを手軽に実行
-NeoBundle 'tomtom/tcomment_vim'
 
-" 選択部分の整形
-NeoBundle 'vim-easy-align'
 
-" 選択文字の両端に文字追加
-NeoBundle 'tpope/vim-surround'
 
-" ログファイルを色づけしてくれる
-NeoBundle 'vim-scripts/AnsiEsc.vim'
 
-" true / falseの変更
-NeoBundle 'AndrewRadev/switch.vim'
 
-" Ruby向けにendを自動挿入してくれる
-NeoBundle 'tpope/vim-endwise'
-
-" Rails向けのコマンドを提供する
-NeoBundle 'tpope/vim-rails'
-
-" slim
-NeoBundle 'slim-template/vim-slim'
-
-" ステータスライン
-NeoBundle 'itchyny/lightline.vim'
 
 " 行末のスペース
 " NeoBundle 'vim-trailing-whitespace'
 
-" urlを開く
-NeoBundle 'tyru/open-browser.vim'
 
-" markdown
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
 
 " tagをIDE風に使う
 NeoBundle 'vim-scripts/taglist.vim'
