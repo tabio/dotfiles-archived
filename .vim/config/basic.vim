@@ -1,8 +1,10 @@
+set autoread                   " 他で書き換えられたら自動で読み直す
 set backspace=start,eol,indent " 挿入モードでbackspaceで行末の改行やタブを削除できるようにする
 set matchtime=2                " 対応する括弧の表示時間を2にする
 set mouse=                     " マウスとの連動機能のOFF
 set noswapfile                 " swapを作らない
 set nowrap                     " 折り返し設定
+set vb t_vb=                   " ビープをならさない
 set whichwrap=b,s,[,],<,>,~    " backspace,space,各矢印キー,チルダキーを使用できるようにする
 
 " タブをスペース2個に置換
@@ -37,3 +39,6 @@ nnoremap <silent> <C-C> :CoffeeCompile vert <CR><C-w>h
 
 "====================== Markdown形式のファイル =======================
 au BufRead,BufNewFile *.md set filetype=markdown
+
+" ファイルタイプ判定をon
+filetype plugin on

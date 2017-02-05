@@ -5,6 +5,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Buffer {{{
   NeoBundle 'scrooloose/nerdtree'
+  NeoBundle 'fholgado/minibufexpl.vim' " タグエディタ風にバッファ管理ウィンドウを表示
 " }}}
 
 " Completion {{{
@@ -40,6 +41,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " }}}
 
 " Programming {{{
+  NeoBundle 'vim-ruby/vim-ruby'
   NeoBundle 'tpope/vim-rails'   " Rails向けのコマンドを提供する
   NeoBundle 'tpope/vim-endwise' " Ruby向けにendを自動挿入してくれる
 " }}}
@@ -65,6 +67,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Unite {{{
   NeoBundle 'Shougo/unite.vim'
+  NeoBundle 'Shougo/neoyank.vim'
   NeoBundle 'ujihisa/unite-colorscheme'
 " }}}
 
@@ -79,3 +82,4 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 
 call neobundle#end()
 filetype plugin indent on
+NeoBundleCheck

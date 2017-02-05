@@ -7,7 +7,7 @@ let g:indent_guides_guide_size = 1            " ガイドの幅
 " 奇数列は意図的に背景色と同じにする
 " hi IndentGuidesOdd  ctermbg=black
 " hi IndentGuidesEven ctermbg=green
-hi IndentGuidesOdd  ctermbg=darkgray
+hi IndentGuidesOdd  ctermbg=black
 hi IndentGuidesEven ctermbg=darkgray
 
 let g:indent_guides_color_change_percent = 30     " ガイドの色の変化の割合
