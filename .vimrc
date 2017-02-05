@@ -1,34 +1,6 @@
 set runtimepath+=~/.vim/
 runtime! config/*.vim
-
-" neobundle自体をneobundleで管理しgit@github.com:を省略
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" 読み込むプラグインを記載
-" NeoBundle 'violetyk/neocomplete-php.vim'
-
-
-
-
-
-
-
-
-
-" 行末のスペース
-" NeoBundle 'vim-trailing-whitespace'
-
-
-
-" tagをIDE風に使う
-NeoBundle 'vim-scripts/taglist.vim'
-
-" ファイルを閉じた都度ctag作成してくれる
-NeoBundle 'szw/vim-tags'
-
-call neobundle#end()
-"====================================================================
-
+runtime! config/plugins/*.vim
 
 ""=============================== 補完機能 ===========================
 " neocomplete
