@@ -40,8 +40,8 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " }}}
 
 " Programming {{{
-  NeoBundle 'tpope/vim-rails' " Rails向けのコマンドを提供する
-  NeoBundle 'tpope/vim-endwise'   " Ruby向けにendを自動挿入してくれる
+  NeoBundle 'tpope/vim-rails'   " Rails向けのコマンドを提供する
+  NeoBundle 'tpope/vim-endwise' " Ruby向けにendを自動挿入してくれる
 " }}}
 
 " Searching/Moving{{{
