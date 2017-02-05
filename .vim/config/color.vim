@@ -1,4 +1,4 @@
-colorscheme mrkn256 " default colorschemaの設定
+colorscheme jellybeans " default colorschemaの設定
 syntax enable       " シンタックスハイライトをON
 
 " 背景色が黒の時の端末共通の色設定
