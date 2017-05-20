@@ -40,5 +40,9 @@ nnoremap <silent> <C-C> :CoffeeCompile vert <CR><C-w>h
 "====================== Markdown形式のファイル =======================
 au BufRead,BufNewFile *.md set filetype=markdown
 
+"====================== jbuilder pryrcをrubyに紐付け =================
+au BufRead,BufNewFile *.jbuilder set filetype=ruby
+au BufRead,BufNewFile .pryrc     set filetype=ruby
+
 " ファイルタイプ判定をon
 filetype plugin on
