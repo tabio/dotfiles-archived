@@ -31,6 +31,9 @@ imap <silent> <C-n> <ESC>:update<CR>:bn<CR>
 vmap <silent> <C-n> <ESC>:update<CR>:bn<CR>
 cmap <silent> <C-n> <ESC>:update<CR>:bn<CR>
 
+"====================== slim =========================================
+autocmd BufRead,BufNewFile *.slim setfiletype slim
+
 "====================== CoffeeScript =================================
 au BufRead,BufNewFile,BufReadPre *.coffee    set filetype=coffee
 autocmd FileType coffee    setlocal sw=2 sts=2 ts=2 et
