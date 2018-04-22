@@ -7,6 +7,8 @@ set nowrap                     " 折り返し設定
 set vb t_vb=                   " ビープをならさない
 set whichwrap=b,s,[,],<,>,~    " backspace,space,各矢印キー,チルダキーを使用できるようにする
 
+set clipboard=unnamed,autoselect " クリップボードとの連携
+
 " タブをスペース2個に置換
 set expandtab
 set ts=2
